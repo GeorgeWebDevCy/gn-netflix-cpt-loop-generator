@@ -61,3 +61,11 @@ function GNNETFLIXC() {
 }
 
 GNNETFLIXC();
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+    'https://github.com/GeorgeWebDevCy/gn-netflix-cpt-loop-generator',
+    __FILE__,
+    'gn-netflix-cpt-loop-generator'
+);
+
+// Set the branch that contains the stable release.
+$myUpdateChecker->setBranch('main');
