@@ -5,13 +5,13 @@
  * @package       GNNETFLIXC
  * @author        George Nicolaou
  * @license       gplv2
- * @version       1.0.0
+ * @version       1.0.1
  *
  * @wordpress-plugin
  * Plugin Name:   GN Netflix CPT Loop Generatot
  * Plugin URI:    https://www.georgenicolaou.me/plugins/gn-netflix-cpt-loop-generator
  * Description:   Create a Netflix type interface as a loop layout for a Custom Post Type
- * Version:       1.0.0
+ * Version:       1.0.1
  * Author:        George Nicolaou
  * Author URI:    https://www.georgenicolaou.me/
  * Text Domain:   gn-netflix-cpt-loop-generator
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 define( 'GNNETFLIXC_NAME',			'GN Netflix CPT Loop Generatot' );
 
 // Plugin version
-define( 'GNNETFLIXC_VERSION',		'1.0.0' );
+define( 'GNNETFLIXC_VERSION',		'1.0.1' );
 
 // Plugin Root File
 define( 'GNNETFLIXC_PLUGIN_FILE',	__FILE__ );
@@ -119,6 +119,12 @@ function project_year_images_shortcode() {
 }
 
 add_shortcode('project_year_images', 'project_year_images_shortcode');
+
+function enqueue_custom_styles() {
+    wp_enqueue_style('custom-styles', plugins_url('style.css', __FILE__));
+}
+
+add_action('wp_enqueue_scripts', 'enqueue_custom_styles');
 /**
  * The main function to load the only instance
  * of our master class.
