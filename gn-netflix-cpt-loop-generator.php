@@ -50,6 +50,75 @@ require_once GNNETFLIXC_PLUGIN_DIR . 'core/class-gn-netflix-cpt-loop-generator.p
 require 'plugin-update-checker/plugin-update-checker.php';
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
+
+function project_year_images_shortcode() {
+    ob_start();
+    
+    // Assuming you have the projects post type and ACF field 'field_6364db1fd90a8'
+    $args = array(
+        'post_type' => 'projects',
+        'posts_per_page' => -1, // To retrieve all posts
+    );
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        $years = array(); // Store unique years
+
+        while ($query->have_posts()) {
+            $query->the_post();
+            $year = get_field('field_6364db1fd90a8'); // Replace with your ACF field name
+
+            if ($year && !in_array($year, $years)) {
+                $years[] = $year;
+            }
+        }
+
+        // Output HTML
+        foreach ($years as $year) {
+            echo '<div class="location" id="home">';
+            echo '<h1 id="home">' . $year . '</h1>';
+            echo '<div class="box">';
+
+            $query->rewind_posts(); // Rewind the loop to get posts again
+
+            $imageCount = 1; // For naming image variables
+
+            while ($query->have_posts()) {
+                $query->the_post();
+                $post_year = get_field('field_6364db1fd90a8'); // Replace with your ACF field name
+
+                if ($post_year == $year) {
+                    $featured_image = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                    $project_link = get_permalink();
+
+                    if ($featured_image) {
+                        echo '<a href="' . $project_link . '">';
+                        echo '<img src="' . $featured_image . '" alt=""></a>';
+
+                        // Increment the image count and add a new line after every 6 images
+                        $imageCount++;
+                        if ($imageCount > 6) {
+                            $imageCount = 1;
+                            echo '<br>';
+                        }
+                    }
+                }
+            }
+
+            echo '</div>'; // Close the box div
+            echo '</div>'; // Close the location div
+        }
+
+        wp_reset_postdata(); // Restore the global post data
+    } else {
+        // No projects found
+    }
+    
+    return ob_get_clean();
+}
+
+add_shortcode('project_year_images', 'project_year_images_shortcode');
 /**
  * The main function to load the only instance
  * of our master class.
@@ -58,7 +127,7 @@ use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
  * @since   1.0.0
  * @return  object|Gn_Netflix_Cpt_Loop_Generator
  */
-function GNNETFLIXC() {
+ function GNNETFLIXC() {
 	return Gn_Netflix_Cpt_Loop_Generator::instance();
 }
 
