@@ -1,17 +1,17 @@
 <?php
 /**
- * GN Netflix CPT Loop Generatot
+ * GN Netflix CPT Loop Generator
  *
  * @package       GNNETFLIXC
  * @author        George Nicolaou
  * @license       gplv2
- * @version       1.0.1
+ * @version       1.0.2
  *
  * @wordpress-plugin
  * Plugin Name:   GN Netflix CPT Loop Generatot
  * Plugin URI:    https://www.georgenicolaou.me/plugins/gn-netflix-cpt-loop-generator
  * Description:   Create a Netflix type interface as a loop layout for a Custom Post Type
- * Version:       1.0.1
+ * Version:       1.0.2
  * Author:        George Nicolaou
  * Author URI:    https://www.georgenicolaou.me/
  * Text Domain:   gn-netflix-cpt-loop-generator
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 define( 'GNNETFLIXC_NAME',			'GN Netflix CPT Loop Generatot' );
 
 // Plugin version
-define( 'GNNETFLIXC_VERSION',		'1.0.1' );
+define( 'GNNETFLIXC_VERSION',		'1.0.2' );
 
 // Plugin Root File
 define( 'GNNETFLIXC_PLUGIN_FILE',	__FILE__ );
