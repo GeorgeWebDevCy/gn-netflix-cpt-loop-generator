@@ -47,6 +47,8 @@ define( 'GNNETFLIXC_PLUGIN_URL',	plugin_dir_url( GNNETFLIXC_PLUGIN_FILE ) );
  * Load the main class for the core functionality
  */
 require_once GNNETFLIXC_PLUGIN_DIR . 'core/class-gn-netflix-cpt-loop-generator.php';
+require 'plugin-update-checker/plugin-update-checker.php';
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 /**
  * The main function to load the only instance
